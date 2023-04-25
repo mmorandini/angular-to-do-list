@@ -1,1 +1,14 @@
-<p>navbar works!</p>
+<nav class="p-3 text-bg-light">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="logo d-flex flex-column align-items-center mb-2 mb-lg-0" [routerLink]="['/']">
+        PRIORITIZR
+      </div>
+      <ul class="nav col-12 col-lg-auto me-lg-auto"></ul>
+      <div class="text-end">
+        <button type="button" class="btn btn-primary" [routerLink]="['/', 'to-do']">Try now</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
