@@ -32,10 +32,12 @@ export class ToDoEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal
   ) {
-    this.formGroup = this.initForm();
+    this.formGroup = this.formBuilder.group({});
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formGroup = this.initForm();
+  }
 
   initForm(): FormGroup {
     return this.formBuilder.group({
