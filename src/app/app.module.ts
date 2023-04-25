@@ -7,6 +7,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from './core/core.module';
+import {StoreModule} from '@ngrx/store';
+import {toDoReducer} from './features/to-do/store/to-do.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {ToDoEffects} from './features/to-do/store/to-do.effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -18,6 +23,11 @@ import {CoreModule} from './core/core.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({todo: toDoReducer}),
+    EffectsModule.forRoot([ToDoEffects]),
+    StoreDevtoolsModule.instrument({
+      name: 'Angular todo App',
+    }),
     NgbModule,
     CoreModule
   ],
