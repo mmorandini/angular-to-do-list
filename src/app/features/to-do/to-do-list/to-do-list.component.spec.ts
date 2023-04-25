@@ -120,12 +120,14 @@ describe('ToDoListComponent', () => {
   });
 
   it('should open edit modal', () => {
+    // @ts-ignore
     spyOn(mockModalService, 'open').and.callThrough();
     component.openEditModal({id: 1, label: 'test', description: 'test test', category: '', done: false});
     expect(mockModalService.open).toHaveBeenCalled();
   });
 
   it('should open create modal', () => {
+    // @ts-ignore
     spyOn(mockModalService, 'open').and.callThrough();
     component.openCreateModal();
     expect(mockModalService.open).toHaveBeenCalled();

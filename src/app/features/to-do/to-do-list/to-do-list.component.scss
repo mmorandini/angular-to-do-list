@@ -1,0 +1,125 @@
+// Import Bootstrap SCSS file
+@import 'bootstrap/scss/bootstrap';
+
+// Variables
+$bg-transition: background-color .3s ease;
+$border-light: 1px solid var(--bs-light);
+$content-max-width: 500px;
+$list-item-padding: 1rem;
+$list-item-gap: map-get($spacers, 4);
+$squared-button-width: 42px;
+
+// Component styles
+:host {
+  // Set the maximum width of the list container
+  .list-actions, .to-do-list {
+    width: 100%;
+    max-width: $content-max-width;
+  }
+
+  .list-actions {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .btn {
+      &:first-child {
+        margin-bottom: 0;
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  .list-actions--left {
+    flex-direction: row;
+    align-items: center;
+
+    .btn:first-child {
+      margin-right: .25rem;
+    }
+  }
+
+  // For small screens and up, adjust the alignment of the action buttons
+  @include media-breakpoint-up(sm) {
+    .list-actions {
+      .btn {
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  // Style each list item
+  .to-do-list-item {
+    padding: $list-item-padding;
+    transition: $bg-transition;
+    border: $border-light;
+    border-top: none;
+
+    // For the first list item, add a top border
+    &:first-child {
+      border-top: $border-light;
+    }
+
+    // When hovering over a list item, change the background color
+    &:hover {
+      background-color: var(--bs-light);
+
+      .to-do-list-item__actions {
+        .btn {
+          opacity: 1;
+
+          &:disabled {
+            opacity: .4;
+          }
+        }
+      }
+    }
+  }
+
+  // Style the information section of each list item
+  .to-do-list-item__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1 1 auto;
+    max-width: calc(100% - (#{$list-item-padding} + #{$squared-button-width} + (#{map-get($spacers, 4)} * 2)));
+
+    .info__badge  {
+      display: flex;
+      align-items: center;
+      height: 1.5rem;
+    }
+
+    // For small screens and up, adjust the maximum width of the information section
+    @include media-breakpoint-up(sm) {
+      max-width: calc(100% - (#{$list-item-padding} + (#{$squared-button-width} * 2) + (#{map-get($spacers, 4)} * 2)));
+    }
+  }
+
+  // Style the actions section of each list item
+  .to-do-list-item__actions {
+    .btn {
+      opacity: 0;
+      transition: opacity .3s ease-out;
+
+      &:last-child {
+        transition: opacity .3s ease-in;
+      }
+    }
+  }
+}
+
+// Style the pagination widget
+ngb-pagination {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
