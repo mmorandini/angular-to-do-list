@@ -1,1 +1,49 @@
-<p>to-do-edit works!</p>
+<form [formGroup]="formGroup" class="p-3">
+  <div class="mb-3">
+    <label for="labelInput" class="form-label">Label</label>
+    <input type="text"
+           formControlName="label"
+           [value]="controls['label'].value"
+           class="form-control"
+           id="labelInput"
+           required
+           [ngClass]="{ 'is-invalid': controls['label'].touched && controls['label'].errors, 'is-valid': controls['label'].valid }"
+    >
+    <div *ngIf="controls['label'].touched && controls['label'].errors" class="invalid-feedback">
+      <div *ngIf="controls['label'].errors['required']">Please enter a label!</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="descriptionTextarea" class="form-label">Description</label>
+    <textarea formControlName="description"
+              id="descriptionTextarea"
+              cols="30"
+              rows="10"
+              [value]="controls['description'].value"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': controls['description'].touched && controls['description'].errors, 'is-valid': controls['description'].valid }"
+    ></textarea>
+    <div *ngIf="controls['description'].touched && controls['description'].errors" class="invalid-feedback">
+      <div *ngIf="controls['description'].errors['required']">Please enter a description!</div>
+      <div *ngIf="controls['description'].errors['maxlength']">
+        This description is {{controls['description'].errors['maxlength'].actualLength - controls['description'].errors['maxlength'].requiredLength}} characters too long! ({{controls['description'].errors['maxlength'].requiredLength}} char max)
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="categoryInput" class="form-label">Category</label>
+    <input type="text"
+           formControlName="category"
+           [value]="formGroup.get('category')!.value"
+           class="form-control"
+           id="categoryInput"
+    >
+  </div>
+
+</form>
+<div class="actions mb-4">
+  <button class="btn btn-primary" type="button" (click)="submit()">{{ mode === 0 ? 'Create' : 'Update'}}</button>
+  <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+</div>
