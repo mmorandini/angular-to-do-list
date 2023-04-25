@@ -1,0 +1,70 @@
+<div class="d-flex flex-column p-4 gap-4 py-md-5 align-items-center justify-content-center">
+  <div class="actions list-actions">
+    <div class="actions list-actions--left">
+      <div ngbDropdown>
+        <button class="btn btn-outline-primary"
+                type="button" id="statusDropdown"
+                ngbDropdownToggle
+                placement="left"
+                ngbTooltip="Filters todos on the server">{{selectStatus === null ? 'Status' : (selectStatus ? 'Done' : 'To do')}}</button>
+
+        <div ngbDropdownMenu aria-labelledby="statusDropdown">
+          <!-- items as buttons -->
+          <button ngbDropdownItem (click)="selectStatus = undefined">All</button>
+          <button ngbDropdownItem (click)="selectStatus = false">To do</button>
+          <button ngbDropdownItem (click)="selectStatus = true">Done</button>
+        </div>
+      </div>
+      <div ngbDropdown>
+        <button class="btn btn-outline-primary" type="button" id="categoriesDropdown" ngbDropdownToggle
+                placement="right"
+                ngbTooltip="Filters todos on the client">{{selectedCategory ? (selectedCategory | titlecase) : 'Category'}}</button>
+        <div ngbDropdownMenu aria-labelledby="categoriesDropdown">
+          <!-- items as buttons -->
+          <button ngbDropdownItem (click)="selectedCategory = ''">All</button>
+          <button ngbDropdownItem *ngFor="let cat of categories$ | async"
+                  (click)="selectedCategory = cat">{{cat | titlecase}}</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success text-light" (click)="openCreateModal()" type="button">
+      <i class="bi bi-plus-circle"></i>
+      <span class="ms-1">Add new task</span>
+    </button>
+  </div>
+
+
+  <form class="to-do-list" [formGroup]="formGroup">
+    <ul formArrayName="toDos" class="p-0 shadow">
+      <li class="d-flex gap-4 to-do-list-item"
+          *ngFor=" let i = index; let todo of (todos$ | async) | slice: (page-1) * pageSize : page * pageSize;"
+          [ngClass]="{'bg-opacity-25': !!todo.done, 'bg-secondary': !!todo.done}">
+        <ng-container [formGroupName]="getFormGroupIndex(i)" *ngIf="todosControls.controls[i] as todoGroup">
+          <input type="checkbox" formControlName="done" [value]="todoGroup.get('done')!.value"
+                 (change)="toggleToDo(todo)">
+          <div class="to-do-list-item__info">
+            <div class="d-flex">
+              <strong class="me-4 info__label">{{todo.label}}</strong>
+              <span class="badge rounded-pill text-bg-info info__badge">{{todo.category | titlecase}}</span>
+            </div>
+            <small class="d-block text-muted text-truncate me-2 info__desc"
+                   [ngClass]="{'text-decoration-line-through': !!todo.done}">{{todo.description}}</small>
+          </div>
+          <div class="actions to-do-list-item__actions">
+            <button class="btn btn-outline-primary btn--no-border" [disabled]="!!todo.done"
+                    (click)="openEditModal(todo)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-outline-danger btn--no-border" (click)="deleteToDo(todo.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </ng-container>
+      </li>
+    </ul>
+
+    <ngb-pagination [(page)]="page" [pageSize]="pageSize"
+                    [collectionSize]="(todos$ | async)?.length || 0"></ngb-pagination>
+  </form>
+</div>

@@ -28,7 +28,6 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     StoreDevtoolsModule.instrument({
       name: 'Angular todo App',
     }),
-    NgbModule,
     CoreModule
   ],
   providers: [],
