@@ -1,0 +1,60 @@
+{
+  "tasks": [
+    {
+      "id": 2,
+      "label": "Living room Cleanup",
+      "description": "Clean my dirty living room",
+      "category": "housekeep",
+      "done": false
+    },
+    {
+      "label": "Sort cables drawer",
+      "description": "Read the label yo",
+      "category": "Electronics",
+      "id": 3,
+      "done": false
+    },
+    {
+      "label": "Clean laptop",
+      "description": "My monitor is very dirty My monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor is very dirtyMy monitor.",
+      "category": "Tech",
+      "id": 8,
+      "done": "30-03-2023"
+    },
+    {
+      "label": "Sort out unread emails",
+      "description": "I have like 5k+",
+      "category": "Tech",
+      "id": 9,
+      "done": false
+    },
+    {
+      "label": "Buy a new water bottle",
+      "description": "Coz I need it",
+      "category": "Shopping",
+      "id": 10,
+      "done": false
+    },
+    {
+      "label": "Haircut",
+      "description": "aaa",
+      "category": "Personal",
+      "id": 11,
+      "done": "30-03-2023"
+    },
+    {
+      "label": "blaaaah",
+      "description": "blah blah",
+      "category": "blah",
+      "id": 12,
+      "done": "29-03-2023"
+    },
+    {
+      "label": "Get some Vitamin D",
+      "description": "It's good for you!",
+      "category": "Self care",
+      "done": false,
+      "id": 13
+    }
+  ]
+}
